@@ -36,6 +36,7 @@ def test_check_lines():
         ]
     )
     assert sudoku2.check_rows() == True
+    assert sudoku2.Solve() == False
 
     sudoku3 = Sudoku(
         [
@@ -54,6 +55,7 @@ def test_check_lines():
     assert sudoku3.check_columns() == True
     assert sudoku3.check_rows() == True
     assert sudoku3.check_squares() == True
+    assert sudoku3.Solve() == False
 
     sudoku4 = Sudoku(
         [[3, 0, 6, 5, 0, 8, 4, 0, 0],
@@ -73,4 +75,18 @@ def test_check_lines():
     sudoku4.Solve()
 
     assert sudoku4.check_valid() == True
+
+    sudoku5 = Sudoku(
+        [[9, 0, 4, 5, 3, 0, 6, 0, 0],
+        [0, 0, 0, 0, 4, 0, 0, 0, 0],
+        [0, 0, 0, 0, 2, 7, 0, 0, 4],
+        [5, 6, 0, 0, 7, 0, 9, 0, 0],
+        [0, 0, 9, 1, 0, 0, 7, 0, 6],
+        [3, 7, 0, 9, 0, 0, 0, 0, 1],
+        [0, 3, 2, 0, 0, 0, 1, 0, 0],
+        [0, 0, 5, 0, 0, 8, 0, 0, 9],
+        [0, 0, 0, 0, 5, 0, 0, 4, 0]]
+    )
+
+    assert sudoku5.Solve() == True
 
