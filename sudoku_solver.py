@@ -1,3 +1,5 @@
+import numpy as np
+
 class Sudoku:
     # class to instatiate a sudoku object with the values given in 9*9 array matrix
     def __init__(self, matrix):
@@ -27,25 +29,43 @@ class Sudoku:
             return True
 
     def check_squares(self):
-        #iterate on the row
+        valid = True
+        #i iterates on the rows
         for i in range(3):
-            square = []
-            #iterate on the column
+            #j iterates on the columns
             for j in range(3):
-                square.extend([self.matrix[j][3*i:(3*i)+3]])
+                square = []
+                #k iterates on the single square lines
+                for k in range(3):
+                    square.extend([self.matrix[(3*j)+k][3*i:(3*i)+3]])
                 #extract only the valid values
-                numbers = list([s for s in square if s != 0])
+                square_list = [item for sublist in square for item in sublist]
+                numbers = [s for s in square_list if s != 0]
+                
                 #check for duplicates (len list != len set)
-                print(numbers)
                 if len(numbers) != len(set(numbers)):
-                    return False
+                    valid = False
                     break
-            else:
-                continue
-        else:
-            return True
+        return valid
 
 
 
+if __name__ == "__main__":
+
+    sudoku3 = Sudoku(
+        [
+            [2, 5, 0, 0, 3, 0, 9, 0, 1],
+            [0, 1, 0, 0, 0, 4, 0, 0, 0],
+            [4, 0, 7, 0, 0, 0, 2, 0, 8],
+            [0, 0, 5, 2, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 9, 8, 1, 0, 0],
+            [0, 4, 0, 0, 0, 3, 0, 0, 0],
+            [0, 0, 0, 3, 6, 0, 0, 7, 2],
+            [0, 7, 0, 0, 0, 0, 0, 0, 3],
+            [9, 0, 3, 0, 0, 0, 6, 0, 4]
+        ]
+    )
+
+    
 
     

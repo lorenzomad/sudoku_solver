@@ -20,7 +20,7 @@ def test_check_lines():
 
     assert sudoku1.check_rows() == True
     assert sudoku1.check_columns() == False
-    #assert sudoku1.check_squares() == False
+    assert sudoku1.check_squares() == False
 
     sudoku2 = Sudoku(
         [
@@ -41,7 +41,7 @@ def test_check_lines():
         [
             [2, 5, 0, 0, 3, 0, 9, 0, 1],
             [0, 1, 0, 0, 0, 4, 0, 0, 0],
-            [4, 0, 7, 0, 0, 0, 2, 0, 8],
+            [4, 6, 7, 0, 0, 0, 2, 0, 8],
             [0, 0, 5, 2, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 9, 8, 1, 0, 0],
             [0, 4, 0, 0, 0, 3, 0, 0, 0],
@@ -53,4 +53,4 @@ def test_check_lines():
 
     assert sudoku3.check_columns() == True
     assert sudoku3.check_rows() == True
-    #assert sudoku3.check_squares() == True
+    assert sudoku3.check_squares() == True
