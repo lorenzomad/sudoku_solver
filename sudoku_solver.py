@@ -15,7 +15,7 @@ class Sudoku:
             return True
     
     def check_columns(self):
-        for i in range(3):
+        for i in range(9):
             column = [row[i] for row in self.matrix]
             #extract only the valid values
             numbers = [s for s in column if s != 0]
