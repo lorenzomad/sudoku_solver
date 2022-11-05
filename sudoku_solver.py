@@ -93,11 +93,13 @@ class Sudoku:
     def Solve(self):
         #function to solve the sudoku
         
-        self.Complete(0,0)
-            
-        print("the sudoku is solved!")
-        self.print_sudoku()
-        
+        if self.Complete(0,0):
+            print("the sudoku is solved!")
+            self.print_sudoku()
+            return True
+        else:
+            print("the sudoku cannot be solved")
+            return False
         
     def print_sudoku(self):
         for row in self.matrix:
@@ -110,22 +112,20 @@ class Sudoku:
 if __name__ == "__main__":
 
     sudoku3 = Sudoku(
-        [[3, 0, 6, 5, 0, 8, 4, 0, 0],
-        [5, 2, 0, 0, 0, 0, 0, 0, 0],
-        [0, 8, 7, 0, 0, 0, 0, 3, 1],
-        [0, 0, 3, 0, 1, 0, 0, 8, 0],
-        [9, 0, 0, 8, 6, 3, 0, 0, 5],
-        [0, 5, 0, 0, 9, 0, 6, 0, 0],
-        [1, 3, 0, 0, 0, 0, 2, 5, 0],
-        [0, 0, 0, 0, 0, 0, 0, 7, 4],
-        [0, 0, 5, 2, 0, 6, 3, 0, 0]]
+        [[9, 0, 4, 5, 3, 0, 6, 0, 0],
+        [0, 0, 0, 0, 4, 0, 0, 0, 0],
+        [0, 0, 0, 0, 2, 7, 0, 0, 4],
+        [5, 6, 0, 0, 7, 0, 9, 0, 0],
+        [0, 0, 9, 1, 0, 0, 7, 0, 6],
+        [3, 7, 0, 9, 0, 0, 0, 0, 1],
+        [0, 3, 2, 0, 0, 0, 1, 0, 0],
+        [0, 0, 5, 0, 0, 8, 0, 0, 9],
+        [0, 0, 0, 0, 5, 0, 0, 4, 0]]
     )
 
     sudoku3.print_sudoku()
     sudoku3.Solve()
-    if sudoku3.check_valid():
-        print("the sudoku is actyually valid!")
-    sudoku3.print_sudoku()
+    
 
     
 
