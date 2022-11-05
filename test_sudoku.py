@@ -48,8 +48,9 @@ def test_check_lines():
             [0, 0, 0, 3, 6, 0, 0, 7, 2],
             [0, 7, 0, 0, 0, 0, 0, 0, 3],
             [9, 0, 3, 0, 0, 0, 6, 0, 4]
-            ]
-        )
+        ]
+    )
+
     assert sudoku3.check_columns() == True
     assert sudoku3.check_rows() == True
     assert sudoku3.check_squares() == True
