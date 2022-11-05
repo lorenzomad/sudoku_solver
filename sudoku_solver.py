@@ -39,8 +39,8 @@ class Sudoku:
                 for k in range(3):
                     square.extend(self.matrix[(3*j)+k][3*i:(3*i)+3])
                 #extract only the valid values
-                square_list = [item for sublist in square for item in sublist]
-                numbers = [s for s in square_list if s != 0]
+                #square_list = [item for sublist in square for item in sublist]
+                numbers = [s for s in square if s != 0]
                 
                 #check for duplicates (len list != len set)
                 if len(numbers) != len(set(numbers)):
@@ -50,7 +50,7 @@ class Sudoku:
 
     def check_valid(self):
         #combines all the checks in one function
-        if (self.check_columns() and self.check_rows() and self.check_squares() == True):
+        if (self.check_columns() == True and self.check_rows() == True and self.check_squares() == True):
             return True
 
         else:
@@ -73,12 +73,17 @@ class Sudoku:
 
         for num in range (1, 10, 1):
             
-            self.matrix[row][column] = num
-            if self.check_valid():
+            trial = self.matrix
+            trial[row][column] = num
+            trial_sudoku = Sudoku(trial)
+
+            if trial_sudoku.check_valid():
+                self.matrix[row][column] = num
                 if self.Complete(row, column + 1):
                     return True
-            self.matrix[row][column] = 0
 
+            self.matrix[row][column] = 0
+            
         return False
 
         
@@ -105,21 +110,22 @@ class Sudoku:
 if __name__ == "__main__":
 
     sudoku3 = Sudoku(
-        [
-            [2, 5, 1, 4, 3, 6, 9, 7, 8],
-            [0, 1, 0, 0, 0, 4, 0, 0, 0],
-            [4, 0, 7, 0, 0, 0, 2, 0, 8],
-            [0, 0, 5, 2, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 9, 8, 1, 0, 0],
-            [0, 4, 0, 0, 0, 3, 0, 0, 0],
-            [0, 0, 0, 3, 6, 0, 0, 7, 2],
-            [0, 7, 0, 0, 0, 0, 0, 0, 3],
-            [9, 0, 3, 0, 0, 0, 6, 0, 4]
-        ]
+        [[3, 0, 6, 5, 0, 8, 4, 0, 0],
+        [5, 2, 0, 0, 0, 0, 0, 0, 0],
+        [0, 8, 7, 0, 0, 0, 0, 3, 1],
+        [0, 0, 3, 0, 1, 0, 0, 8, 0],
+        [9, 0, 0, 8, 6, 3, 0, 0, 5],
+        [0, 5, 0, 0, 9, 0, 6, 0, 0],
+        [1, 3, 0, 0, 0, 0, 2, 5, 0],
+        [0, 0, 0, 0, 0, 0, 0, 7, 4],
+        [0, 0, 5, 2, 0, 6, 3, 0, 0]]
     )
 
     sudoku3.print_sudoku()
     sudoku3.Solve()
+    if sudoku3.check_valid():
+        print("the sudoku is actyually valid!")
+    sudoku3.print_sudoku()
 
     
 
