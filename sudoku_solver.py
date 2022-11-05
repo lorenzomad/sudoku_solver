@@ -48,62 +48,56 @@ class Sudoku:
                     break
         return valid
 
+    def check_valid(self):
+        #combines all the checks in one function
+        if (self.check_columns() and self.check_rows() and self.check_squares() == True):
+            return True
 
-    def Complete(self):
+        else:
+            return False
+
+
+
+    def Complete(self, row, column):
         #recursive function to try a number
         
-        solved = False    
+        if (row == 8 and column == 9):
+            return True
+
+        if column == 9:
+            row += 1
+            column = 0
+
+        if self.matrix[row][column] != 0:
+            return self.Complete(row, column + 1)
+
+        for num in range (1, 10, 1):
+            
+            self.matrix[row][column] = num
+            if self.check_valid():
+                if self.Complete(row, column + 1):
+                    return True
+            self.matrix[row][column] = 0
+
+        return False
+
         
-        while solved == False: 
-            #decide which value ot try as input 
-            for row in self.matrix:
-                if 0 in row:
-                    row_value= self.matrix.index(row)
-                    column_value = row.index(0)
 
-                    square_row = row_value // 3
-                    square_column = column_value // 3
-                    
-                    #this set will remember the numbers which are in the 
-                    #same row column or square
-                    numbers = set()
-
-                    #add the elements for the corresponding row
-                    for element in row:
-                        numbers.add(element)
-                    column = [row[column_value] for row in self.matrix]
-                    
-                    #add the elements for the corresponding column
-                    for element in column:
-                        numbers.add(element)
-
-                    # add the elements for the corresponding square
-                    for k in range(3):
-                        line = self.matrix[(3*(square_row))+k][3*square_column:(3*square_column)+3]
-                        numbers.update(line)
-
-                    all_numbers = {1,2,3,4,5,6,7,8,9}
-
-                    possible = list(all_numbers.difference(numbers))
-
-                    
-
-                else:
-                    solved = True
 
 
     def Solve(self):
         #function to solve the sudoku
         
-        self.Complete()
+        self.Complete(0,0)
             
         print("the sudoku is solved!")
         self.print_sudoku()
         
         
     def print_sudoku(self):
-        pass
-        #need to write it 
+        for row in self.matrix:
+            print(row)
+         
 
 
 
@@ -124,6 +118,7 @@ if __name__ == "__main__":
         ]
     )
 
+    sudoku3.print_sudoku()
     sudoku3.Solve()
 
     
