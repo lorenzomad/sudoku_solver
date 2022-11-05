@@ -66,6 +66,6 @@ if __name__ == "__main__":
         ]
     )
 
-    sudoku3.check_squares()
+    
 
     
