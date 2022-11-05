@@ -32,10 +32,11 @@ class Sudoku:
             square = []
             #iterate on the column
             for j in range(3):
-                square.append([self.matrix[j][i, i+1, i+2]])
+                square.extend([self.matrix[j][3*i:(3*i)+3]])
                 #extract only the valid values
-                numbers = [s for s in square if s != 0]
+                numbers = list([s for s in square if s != 0])
                 #check for duplicates (len list != len set)
+                print(numbers)
                 if len(numbers) != len(set(numbers)):
                     return False
                     break
