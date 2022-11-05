@@ -15,7 +15,7 @@ class Sudoku:
             return True
     
     def check_columns(self):
-        for i in range(len(self.matrix[0])):
+        for i in range(9):
             column = [row[i] for row in self.matrix]
             #extract only the valid values
             numbers = [s for s in column if s != 0]
@@ -25,6 +25,25 @@ class Sudoku:
                 break
         else:
             return True
+
+    def check_squares(self):
+        #iterate on the row
+        for i in range(3):
+            square = []
+            #iterate on the column
+            for j in range(3):
+                square.append([self.matrix[j][i, i+1, i+2]])
+                #extract only the valid values
+                numbers = [s for s in square if s != 0]
+                #check for duplicates (len list != len set)
+                if len(numbers) != len(set(numbers)):
+                    return False
+                    break
+            else:
+                continue
+        else:
+            return True
+
 
 
 
